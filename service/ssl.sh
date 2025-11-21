@@ -268,7 +268,8 @@ EOF
         --webroot "${ACME_WEBROOT_PATH}" \
         --keylength ec-256 \
         --accountkeylength ec-256 \
-        --server letsencrypt
+        --server letsencrypt \
+        --listen-v6
 
     # 检查签发命令的退出状态
     local issue_status=$?
@@ -280,6 +281,7 @@ EOF
             --keylength ec-256 \
             --accountkeylength ec-256 \
             --server letsencrypt \
+            --listen-v6 \
             --debug
         # 恢复原始 Nginx 配置
         mv -f "${nginx_conf_bak}" "${nginx_conf}"
