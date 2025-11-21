@@ -158,8 +158,8 @@ function install_acme_sh() {
     # 启用 acme.sh 的自动升级功能
     "${HOME}/.acme.sh/acme.sh" --upgrade --auto-upgrade || print_error "$(echo "$I18N_DATA" | jq -r ".${CUR_FILE}.install.fail_autoupgrade")"
 
-    # 设置 acme.sh 的默认 CA 为 ZeroSSL
-    "${HOME}/.acme.sh/acme.sh" --set-default-ca --server zerossl || print_error "$(echo "$I18N_DATA" | jq -r ".${CUR_FILE}.install.fail_set_ca")"
+    # 设置 acme.sh 的默认 CA
+    "${HOME}/.acme.sh/acme.sh" --set-default-ca --server letsencrypt || print_error "$(echo "$I18N_DATA" | jq -r ".${CUR_FILE}.install.fail_set_ca")"
 }
 
 # =============================================================================
@@ -268,7 +268,7 @@ EOF
         --webroot "${ACME_WEBROOT_PATH}" \
         --keylength ec-256 \
         --accountkeylength ec-256 \
-        --server zerossl \
+        --server letsencrypt \
         --ocsp
 
     # 检查签发命令的退出状态
@@ -280,7 +280,7 @@ EOF
             --webroot "${ACME_WEBROOT_PATH}" \
             --keylength ec-256 \
             --accountkeylength ec-256 \
-            --server zerossl \
+            --server letsencrypt \
             --ocsp \
             --debug
         # 恢复原始 Nginx 配置
