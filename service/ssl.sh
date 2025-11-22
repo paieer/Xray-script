@@ -281,6 +281,7 @@ EOF
             --keylength ec-256 \
             --accountkeylength ec-256 \
             --listen-v6 \
+            --force \
             --debug
         # 恢复原始 Nginx 配置
         mv -f "${nginx_conf_bak}" "${nginx_conf}"
