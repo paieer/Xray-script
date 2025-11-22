@@ -247,6 +247,7 @@ http {
     keepalive_timeout  65;
     server {
         listen       80;
+        listen       [::]:80;
         location ^~ /.well-known/acme-challenge/ {
             root ${ACME_WEBROOT_PATH};
         }
@@ -268,7 +269,6 @@ EOF
         --webroot "${ACME_WEBROOT_PATH}" \
         --keylength ec-256 \
         --accountkeylength ec-256 \
-        --server letsencrypt \
         --listen-v6
 
     # 检查签发命令的退出状态
@@ -280,7 +280,6 @@ EOF
             --webroot "${ACME_WEBROOT_PATH}" \
             --keylength ec-256 \
             --accountkeylength ec-256 \
-            --server letsencrypt \
             --listen-v6 \
             --debug
         # 恢复原始 Nginx 配置
