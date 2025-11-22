@@ -398,7 +398,7 @@ function download_github_files() {
 function download_xray_script_files() {
     local target_dir="$1" # 本地目标根目录
     # 定义 GitHub API 项目 URL
-    local script_github_api="https://api.github.com/repos/paieer/xray-script/tarball/main"
+    local script_github_api="https://cdn.gh-proxy.org/https://api.github.com/repos/paieer/xray-script/tarball/main"
 
     # 调用 download_github_files 下载项目
     download_github_files "${target_dir}" "${script_github_api}"
