@@ -529,9 +529,9 @@ function source_compile() {
     cd "${TMPFILE_DIR}" # 切换到临时目录
     print_info "$(echo "$I18N_DATA" | jq -r '.nginx.compile.fetch_versions')"
     # 从 GitHub API 获取最新的 Nginx release 标签名
-    local nginx_version="$(wget -qO- --no-check-certificate https://api.github.com/repos/nginx/nginx/tags | grep 'name' | cut -d\" -f4 | grep 'release' | head -1 | sed 's/release/nginx/')"
+    local nginx_version="$(wget -qO- --no-check-certificate "https://cdn.gh-proxy.org/https://api.github.com/repos/nginx/nginx/tags" | grep 'name' | cut -d\" -f4 | grep 'release' | head -1 | sed 's/release/nginx/')"
     # 获取最新的 OpenSSL 标签名 (格式为 openssl-x.y.z)
-    local openssl_version="openssl-$(wget -qO- --no-check-certificate https://api.github.com/repos/openssl/openssl/tags | grep 'name' | cut -d\" -f4 | grep -Eoi '^openssl-([0-9]\.?){3}$' | head -1)"
+    local openssl_version="openssl-$(wget -qO- --no-check-certificate "https://cdn.gh-proxy.org/https://api.github.com/repos/openssl/openssl/tags" | grep 'name' | cut -d\" -f4 | grep -Eoi '^openssl-([0-9]\.?){3}$' | head -1)"
 
     # 生成编译器优化标志
     gen_cflags
@@ -605,8 +605,8 @@ function source_install() {
 function source_update() {
     print_info "$(echo "$I18N_DATA" | jq -r '.nginx.update.fetch_versions')"
     # 获取最新的版本号
-    local latest_nginx_version="$(wget -qO- --no-check-certificate https://api.github.com/repos/nginx/nginx/tags | grep 'name' | cut -d\" -f4 | grep 'release' | head -1 | sed 's/release/nginx/')"
-    local latest_openssl_version="$(wget -qO- --no-check-certificate https://api.github.com/repos/openssl/openssl/tags | grep 'name' | cut -d\" -f4 | grep -Eoi '^openssl-([0-9]\.?){3}$' | head -1)"
+    local latest_nginx_version="$(wget -qO- --no-check-certificate "https://cdn.gh-proxy.org/https://api.github.com/repos/nginx/nginx/tags" | grep 'name' | cut -d\" -f4 | grep 'release' | head -1 | sed 's/release/nginx/')"
+    local latest_openssl_version="$(wget -qO- --no-check-certificate "https://cdn.gh-proxy.org/https://api.github.com/repos/openssl/openssl/tags" | grep 'name' | cut -d\" -f4 | grep -Eoi '^openssl-([0-9]\.?){3}$' | head -1)"
 
     print_info "$(echo "$I18N_DATA" | jq -r '.nginx.update.read_current_versions')"
     # 获取当前安装的 Nginx 和 OpenSSL 版本
