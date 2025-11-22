@@ -830,7 +830,7 @@ function handler_xray_version() {
     case "${xray_version,,}" in
     latest)
         # 获取最新的 Xray 版本
-        CONFIG_DATA['version']="$(curl -fsSL https://api.github.com/repos/XTLS/Xray-core/releases | jq -r '.[0].tag_name')"
+        CONFIG_DATA['version']="$(curl -fsSL "https://cdn.gh-proxy.org/https://api.github.com/repos/XTLS/Xray-core/releases" | jq -r '.[0].tag_name')"
         ;;
     custom)
         # 读取用户自定义的版本
@@ -838,7 +838,7 @@ function handler_xray_version() {
         ;;
     *)
         # 获取最新的 release 版本
-        CONFIG_DATA['version']="$(curl -fsSL https://api.github.com/repos/XTLS/Xray-core/releases/latest | jq -r '.tag_name')"
+        CONFIG_DATA['version']="$(curl -fsSL "https://cdn.gh-proxy.org/https://api.github.com/repos/XTLS/Xray-core/releases/latest" | jq -r '.tag_name')"
         ;;
     esac
     # 更新脚本配置中的 Xray 版本
