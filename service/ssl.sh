@@ -268,8 +268,7 @@ EOF
     "${HOME}/.acme.sh/acme.sh" --issue -d ${DOMAIN} \
         --webroot "${ACME_WEBROOT_PATH}" \
         --keylength ec-256 \
-        --accountkeylength ec-256 \
-        --listen-v6
+        --accountkeylength ec-256
 
     # 检查签发命令的退出状态
     local issue_status=$?
